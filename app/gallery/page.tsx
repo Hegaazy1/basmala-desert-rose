@@ -1,7 +1,7 @@
 export default function GalleryPage() {
   const images = Array.from(
     { length: 12 },
-    (_, i) => `/images/Photo${i + 1}.jpg`
+    (_, i) => `/images/photo${i + 1}.jpg`
   );
 
   return (
