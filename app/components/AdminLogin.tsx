@@ -19,6 +19,9 @@ async function login() {
     .eq("password", password)
     .single();
 
+  console.log("Data:", data);
+  console.log("Error:", error);
+
   if (error || !data) {
     alert("اسم المستخدم أو كلمة السر غلط");
     return;
