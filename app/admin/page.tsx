@@ -16,6 +16,18 @@ type Trip = {
   }[];
 };
 
+const tripNames = [
+  "ABO DBBAB",
+  "PORTO",
+  "DOLPHIN HOUSE",
+  "SATAYA",
+  "HAAMATA",
+  "SHARM EL LULI",
+  "CORAL",
+  "O-N",
+  "BLUE LAGON",
+  "HERMES",
+];
 export default function AdminPage() {
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -27,7 +39,7 @@ export default function AdminPage() {
   const [username, setUsername] = useState("");
 
   const [search, setSearch] = useState("");
-
+const [tripSearch, setTripSearch] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
 
   const [trips, setTrips] = useState<Trip[]>([]);
@@ -424,19 +436,40 @@ export default function AdminPage() {
 
 
 
-          <input
+         <div className="relative">
+  <input
+    type="text"
+    placeholder="Search Trip Name..."
+    value={tripName}
+    onChange={(e) => {
+      const value = e.target.value.toUpperCase();
 
-          type="text"
+      setTripName(value);
+      setTripSearch(value);
+    }}
+    className="p-4 rounded-xl bg-gray-800 border border-gray-600 text-white w-full"
+  />
 
-          placeholder="Trip Name"
-
-          value={tripName}
-
-          onChange={(e)=>setTripName(e.target.value)}
-
-          className="p-4 rounded-xl bg-gray-800 border border-gray-600 text-white"
-
-          />
+  {tripSearch && (
+    <div className="absolute z-50 left-0 right-0 mt-2 bg-gray-900 border border-gray-600 rounded-xl overflow-hidden shadow-2xl">
+      {tripNames
+        .filter((name) => name.includes(tripSearch))
+        .map((name) => (
+          <button
+            key={name}
+            type="button"
+            onClick={() => {
+              setTripName(name);
+              setTripSearch("");
+            }}
+            className="block w-full text-left px-4 py-3 text-white hover:bg-yellow-500 hover:text-black transition"
+          >
+            {name}
+          </button>
+        ))}
+    </div>
+  )}
+</div>
 
 
 
